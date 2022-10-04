@@ -1,7 +1,11 @@
+using Microsoft.Extensions.DependencyInjection;
+using PeekABookWebApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var mvcBuilder = builder.Services.AddRazorPages();
+builder.Services.AddTransient<BooksRepositoryService>();
 
 if (builder.Environment.IsDevelopment())
 {

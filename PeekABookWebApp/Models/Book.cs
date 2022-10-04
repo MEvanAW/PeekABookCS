@@ -2,13 +2,22 @@
 {
     public class Book
     {
-        string Title { get; set; } = "No Title";
-        IEnumerable<string> Authors { get; set; } = new List<string> {"Anonym"};
-        string? Description { get; set; }
-        int? PageCount { get; set; }
-        IEnumerable<string>? Categories { get; set; }
-        double? AverageRating { get; set; }
-        ImageLinks? ImageLinks { get; set; }
-        string? PreviewLink { get; set; }
+        public string Title { get; set; } = "No Title";
+        public IEnumerable<string> Authors { get; set; } = new List<string> {"Anonym"};
+        public string? Description { get; set; }
+        public int? PageCount { get; set; }
+        public IEnumerable<string>? Categories { get; set; }
+        public double? AverageRating { get; set; }
+        public ImageLinks? ImageLinks { get; set; }
+        public string? PreviewLink { get; set; }
+
+        public string TruncatedDescription(uint maxLength)
+        {
+            if (Description == null)
+                return "";
+            if (Description.Length <= maxLength)
+                return Description;
+            return Description[..(int)maxLength] + "...";
+        }
     }
 }

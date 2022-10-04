@@ -2,6 +2,6 @@
 {
     public class BooksApiResponse
     {
-        IEnumerable<Item>? Items { get; set; }
+        public IEnumerable<Item>? Items { get; set; }
     }
 }

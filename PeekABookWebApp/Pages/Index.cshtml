@@ -14,10 +14,10 @@
     <div class="col-4">
         <div class="card">
             <div class="card-body">
-                <img class="card-img-top" style="max-height: 18rem; object-fit :cover;" src="https://avatars.githubusercontent.com/u/50491841?v=4" alt="Alt Text" />
-                <h3 class="card-title">Book 1 Title</h3>
-                <p class="card-text"><i>Book 1 Author</i></p>
-                <p class="card-text">Book 1 Description</p>
+                <img class="card-img-top" style="max-height: 18rem; object-fit :cover;" src="@Model.Src" alt="Alt Text" />
+                <h3 class="card-title">@Model.Book.Title</h3>
+                <p class="card-text"><i>@Model.Book.Authors.First()</i></p>
+                <p class="card-text" maxLength="178">@Model.Book.TruncatedDescription(175)</p>
                 <a href="#" class="btn btn-primary">Read</a>
             </div>
         </div>

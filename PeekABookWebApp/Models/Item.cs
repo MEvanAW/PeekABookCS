@@ -5,6 +5,6 @@ namespace PeekABookWebApp.Models
     public class Item
     {
         [JsonPropertyName("volumeInfo")]
-        Book? Book { get; set; }
+        public Book? Book { get; set; }
     }
 }
