@@ -46,7 +46,6 @@ namespace PeekABookWebApp.Services
         }
         public async Task<IEnumerable<Book>> GetBooksBySubject(string subject, int maxResults)
         {
-            subject = subject.Replace(' ', '+');
             List<Book> books = new List<Book>();
             using (var client = new HttpClient())
             {
