@@ -10,14 +10,5 @@
         public double? AverageRating { get; set; }
         public ImageLinks ImageLinks { get; set; } = new ImageLinks();
         public string? PreviewLink { get; set; }
-
-        public string TruncatedDescription(uint maxLength)
-        {
-            if (Description == null)
-                return "";
-            if (Description.Length <= maxLength)
-                return Description;
-            return Description[..(int)maxLength] + "...";
-        }
     }
 }

@@ -8,18 +8,37 @@
     <h1 class="display-4 text-primary">Welcome to peek a book</h1>
 </div>
 <div class="text-start">
-    <h2 class="display-5">Trending Book Genres</h2>
+    <h2 class="display-5">Books by Genres</h2>
     <h3 class="display-6">Latest Fantasy Books</h3>
 </div>
 <div class="card-group">
-    @foreach (var book in Model.Books)
+    @foreach (var book in Model.FantasyBooks)
     {
-        <div class="card">
+        <div class="card" style="margin-bottom: 1.15em">
             <div class="card-body">
                 <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
                 <h4 class="card-title">@book.Title</h4>
                 <p class="card-text"><i>@book.Authors.First()</i></p>
-                <p class="card-text" maxLength="178">@book.TruncatedDescription(169)</p>
+                <p class="card-text" style="text-align: justify; max-height: 4.6em; line-height: 1.15em; text-overflow: ellipsis; overflow: hidden;">@book.Description</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-primary float-end">Read</a>
+            </div>
+        </div>
+    }
+</div>
+<div class="text-start">
+    <h3 class="display-6">Latest Self Help Books</h3>
+</div>
+<div class="card-group">
+    @foreach (var book in Model.SelfHelpBooks)
+    {
+        <div class="card" style="margin-bottom: 1.15em">
+            <div class="card-body">
+                <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
+                <h4 class="card-title">@book.Title</h4>
+                <p class="card-text"><i>@book.Authors.First()</i></p>
+                <p class="card-text" style="text-align: justify; max-height: 4.6em; line-height: 1.15em; text-overflow: ellipsis; overflow: hidden;">@book.Description</p>
             </div>
             <div class="card-footer">
                 <a href="#" class="btn btn-primary float-end">Read</a>
