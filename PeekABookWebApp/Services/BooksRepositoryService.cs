@@ -11,7 +11,7 @@ namespace PeekABookWebApp.Services
             _baseUrl = configuration["GoogleBooksUrl"];
             _booksApiKey = configuration["BooksApiKey"];
         }
-        public async Task<IEnumerable<Book>> GetBooks(string q)
+        public async Task<IEnumerable<Book>> GetBooks(string q, int maxResults)
         {
             q = q.Replace(' ', '+');
             List<Book> books = new List<Book>();
@@ -22,7 +22,10 @@ namespace PeekABookWebApp.Services
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 // Sending request to find web api REST service resource Volumes using HttpClient
-                var response = await client.GetAsync("volumes?langRestrict=en&filter=full&orderBy=newest&fields=items(volumeInfo/title,volumeInfo/authors,volumeInfo/averageRating,volumeInfo/pageCount,volumeInfo/description,volumeInfo/categories,volumeInfo/imageLinks/*,volumeInfo/previewLink)&key=" + _booksApiKey + "&q=" + q);
+                var response = await client.GetAsync("volumes?langRestrict=en&filter=full&orderBy=newest&fields=items(volumeInfo/title,volumeInfo/authors,volumeInfo/averageRating,volumeInfo/pageCount,volumeInfo/description,volumeInfo/categories,volumeInfo/imageLinks/*,volumeInfo/previewLink)&key="
+                    + _booksApiKey +
+                    "&q=" + q +
+                    "&maxResults=" + maxResults);
                 if (response.IsSuccessStatusCode)
                 {
                     BooksApiResponse? booksApiResponse = await response.Content.ReadFromJsonAsync<BooksApiResponse>();

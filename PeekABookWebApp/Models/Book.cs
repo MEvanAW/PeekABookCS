@@ -8,7 +8,7 @@
         public int? PageCount { get; set; }
         public IEnumerable<string>? Categories { get; set; }
         public double? AverageRating { get; set; }
-        public ImageLinks? ImageLinks { get; set; }
+        public ImageLinks ImageLinks { get; set; } = new ImageLinks();
         public string? PreviewLink { get; set; }
 
         public string TruncatedDescription(uint maxLength)
