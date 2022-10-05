@@ -9,12 +9,12 @@
 </div>
 <div class="text-start">
     <h2 class="display-5">Books by Genres</h2>
-    <h3 class="display-6">Latest Fantasy Books</h3>
+    <h3 class="display-6">Fantasy Books</h3>
 </div>
-<div class="card-group">
+<div class="card-group" style="margin-bottom: 1.15em">
     @foreach (var book in Model.FantasyBooks)
     {
-        <div class="card" style="margin-bottom: 1.15em">
+        <div class="card">
             <div class="card-body">
                 <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
                 <h4 class="card-title">@book.Title</h4>
@@ -28,12 +28,12 @@
     }
 </div>
 <div class="text-start">
-    <h3 class="display-6">Latest Self Help Books</h3>
+    <h3 class="display-6">Self Help Books</h3>
 </div>
-<div class="card-group">
+<div class="card-group" style="margin-bottom: 1.15em">
     @foreach (var book in Model.SelfHelpBooks)
     {
-        <div class="card" style="margin-bottom: 1.15em">
+        <div class="card">
             <div class="card-body">
                 <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
                 <h4 class="card-title">@book.Title</h4>
