@@ -1,4 +1,5 @@
 ﻿@page
+@using PeekABookWebApp.Components
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -14,17 +15,7 @@
 <div class="card-group" style="margin-bottom: 1.15em">
     @foreach (var book in Model.FantasyBooks)
     {
-        <div class="card">
-            <div class="card-body">
-                <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
-                <h4 class="card-title">@book.Title</h4>
-                <p class="card-text"><i>@book.Authors.First()</i></p>
-                <p class="card-text" style="text-align: justify; max-height: 4.6em; line-height: 1.15em; text-overflow: ellipsis; overflow: hidden;">@book.Description</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary float-end">Read</a>
-            </div>
-        </div>
+        @(await Html.RenderComponentAsync<BookCard>(RenderMode.ServerPrerendered, new { Book = book }))
     }
 </div>
 <div class="text-start">
@@ -33,16 +24,7 @@
 <div class="card-group" style="margin-bottom: 1.15em">
     @foreach (var book in Model.SelfHelpBooks)
     {
-        <div class="card">
-            <div class="card-body">
-                <img class="card-img-top" style="max-height: 18rem; object-fit: cover; object-position: top" src="@book.ImageLinks.Src()" alt="Alt Text" />
-                <h4 class="card-title">@book.Title</h4>
-                <p class="card-text"><i>@book.Authors.First()</i></p>
-                <p class="card-text" style="text-align: justify; max-height: 4.6em; line-height: 1.15em; text-overflow: ellipsis; overflow: hidden;">@book.Description</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary float-end">Read</a>
-            </div>
-        </div>
+        @(await Html.RenderComponentAsync<BookCard>(RenderMode.ServerPrerendered, new { Book = book }))
     }
 </div>
+<script src="_framework/blazor.server.js"></script>
