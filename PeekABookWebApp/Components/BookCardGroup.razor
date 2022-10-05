@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using PeekABookWebApp.Models
+
+<div class="card-group" style="margin-bottom: 1.15em">
+    @foreach (var book in Books)
+    {
+        <div class="card">
+            <BookCardBody Book="@book"/>
+            <div class="card-footer">
+                <div class="btn-group float-end text-muted">
+                    <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#@DescriptionModal()">Full Description</button>
+                    <button class="btn btn-primary">Read</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if(selectedBook != null) {
+    <div class="modal fade" id="@DescriptionModal()" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookTitle">@selectedBook.Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('@selectedBook.ImageLinks.Src()');">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@selectedBook.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<Book> Books { get; set; } = new List<Book>();
+    [Parameter]
+    public string ModalTag { get; set; } = "";
+    Book selectedBook = new Book();
+    string selectedBookTitle = "";
+    void SelectBook(string title) {
+        selectedBookTitle = title;
+        var temp = (from book in Books where book.Title == title select book).FirstOrDefault();
+        if (temp != null)
+            selectedBook = temp;
+    }
+    string DescriptionModal() {
+        return "description" + ModalTag + "Modal";
+    }
+}

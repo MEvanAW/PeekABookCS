@@ -12,19 +12,11 @@
     <h2 class="display-6">Books by Genres</h2>
     <h3 class="display-7">Fantasy Books</h3>
 </div>
-<div class="card-group" style="margin-bottom: 1.15em">
-    @foreach (var book in Model.FantasyBooks)
-    {
-        @(await Html.RenderComponentAsync<BookCard>(RenderMode.ServerPrerendered, new { Book = book }))
-    }
-</div>
+@(await Html.RenderComponentAsync<BookCardGroup>(RenderMode.ServerPrerendered, new { Books = Model.FantasyBooks, ModalTag = "Fantasy" }))
 <div class="text-start">
     <h3 class="display-7">Self Help Books</h3>
 </div>
 <div class="card-group" style="margin-bottom: 1.15em">
-    @foreach (var book in Model.SelfHelpBooks)
-    {
-        @(await Html.RenderComponentAsync<BookCard>(RenderMode.ServerPrerendered, new { Book = book }))
-    }
+        @(await Html.RenderComponentAsync<BookCardGroup>(RenderMode.ServerPrerendered, new { Books = Model.SelfHelpBooks, ModalTag = "SelfHelp" }))
 </div>
 <script src="_framework/blazor.server.js"></script>
