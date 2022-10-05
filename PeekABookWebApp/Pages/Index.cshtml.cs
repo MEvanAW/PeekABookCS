@@ -22,8 +22,8 @@ namespace PeekABookWebApp.Pages
 
         public async Task OnGetAsync()
         {
-            var fantasyTask = BooksRepositoryService.GetBooksBySubject("Fantasy", 3);
-            var selfHelpTask = BooksRepositoryService.GetBooksBySubject("\"Self+Help\"", 3);
+            var fantasyTask = BooksRepositoryService.GetBooksBySubject("Fantasy", 4);
+            var selfHelpTask = BooksRepositoryService.GetBooksBySubject("\"Self+Help\"", 4);
             var tasks = new List<Task> { fantasyTask, selfHelpTask };
             while (tasks.Count > 0)
             {
