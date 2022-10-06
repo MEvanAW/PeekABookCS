@@ -20,3 +20,8 @@
         @(await Html.RenderComponentAsync<BookCardGroup>(RenderMode.ServerPrerendered, new { Books = Model.SelfHelpBooks, ModalTag = "SelfHelp" }))
 </div>
 <script src="_framework/blazor.server.js"></script>
+<script>
+    window.toggleModal = (modalTag) => {
+        $('#'.concat(modalTag)).modal('toggle');
+    }
+</script>

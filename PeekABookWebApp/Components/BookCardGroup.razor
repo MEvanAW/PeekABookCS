@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
 @using PeekABookWebApp.Models
+@inject IJSRuntime JS
 
 <div class="card-group" style="margin-bottom: 1.15em">
     @foreach (var book in Books)
@@ -22,7 +24,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="bookTitle">@selectedBook.Title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button @onclick="(e => ToggleModal())" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -45,15 +47,19 @@
     public IEnumerable<Book> Books { get; set; } = new List<Book>();
     [Parameter]
     public string ModalTag { get; set; } = "";
-    Book selectedBook = new Book();
-    string selectedBookTitle = "";
-    void SelectBook(string title) {
+    private Book? selectedBook;
+    private string selectedBookTitle = "";
+    private void SelectBook(string title) {
         selectedBookTitle = title;
         var temp = (from book in Books where book.Title == title select book).FirstOrDefault();
         if (temp != null)
             selectedBook = temp;
+        ToggleModal();
     }
-    string DescriptionModal() {
+    private async void ToggleModal() {
+        await JS.InvokeVoidAsync("toggleModal", DescriptionModal());
+    }
+    private string DescriptionModal() {
         return "description" + ModalTag + "Modal";
     }
 }
