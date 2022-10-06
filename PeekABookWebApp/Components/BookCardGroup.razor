@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using PeekABookWebApp.Models
+@inject IJSRuntime JS
+
+<div class="card-group" style="margin-bottom: 1.15em">
+    @foreach (var book in Books)
+    {
+        <div class="card">
+            <BookCardBody Book="@book"/>
+            <div class="card-footer">
+                <div class="btn-group float-end text-muted">
+                    <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#@DescriptionModal()">Full Info</button>
+                    <button class="btn btn-primary">Read</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="@DescriptionModal()" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookTitle">@selectedBook.Title</h5>
+                <button @onclick="(e => ToggleModal())" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <img class="card-img" src="@selectedBook.ImageLinks.Src()" />
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Author(s): @string.Join(", ", selectedBook.Authors)</li>
+                                @if(selectedBook.PageCount != null) {
+                                    <li class="list-group-item">Page count: @selectedBook.PageCount</li>
+                                }
+                                @if(selectedBook.Categories != null) {
+                                    <li class="list-group-item">Genre(s): @string.Join(", ", selectedBook.Categories)</li>
+                                }
+                                @if(selectedBook.AverageRating != null) {
+                                    <li class="list-group-item">Average Rating: @selectedBook.AverageRating/5</li>
+                                }
+                            </ul>
+                            <div class="card-body">
+                                <p class="card-text" style="text-align: justify;">@selectedBook.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public IEnumerable<Book> Books { get; set; } = new List<Book>();
+    [Parameter]
+    public string ModalTag { get; set; } = "";
+    private Book selectedBook = new Book();
+    private string selectedBookTitle = "";
+    private void SelectBook(string title) {
+        selectedBookTitle = title;
+        var temp = (from book in Books where book.Title == title select book).FirstOrDefault();
+        if (temp != null)
+            selectedBook = temp;
+        ToggleModal();
+    }
+    private async void ToggleModal() {
+        await JS.InvokeVoidAsync("toggleModal", DescriptionModal());
+    }
+    private string DescriptionModal() {
+        return "description" + ModalTag + "Modal";
+    }
+}

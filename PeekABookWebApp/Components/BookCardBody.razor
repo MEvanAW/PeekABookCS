@@ -1,0 +1,15 @@
+﻿@using PeekABookWebApp.Models
+
+<div class="card-body">
+    <img class="card-img-top" style="max-height: 13rem; object-fit: cover; object-position: top" src="@Book.ImageLinks.Src()" alt="Alt Text" />
+    <h4 class="card-title">@Book.Title</h4>
+    <p class="card-text"><i>@string.Join(", ", Book.Authors)</i></p>
+    @if(Book.Description != null) {
+        <p class="card-text" style="text-align: justify; max-height: 4.6em; line-height: 1.15em; text-overflow: ellipsis; overflow: hidden;">@Book.Description</p>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Book Book { get; set; } = new Book();
+}
