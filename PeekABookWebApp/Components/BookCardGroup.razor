@@ -10,7 +10,7 @@
             <BookCardBody Book="@book"/>
             <div class="card-footer">
                 <div class="btn-group float-end text-muted">
-                    <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#@DescriptionModal()">Full Info</button>
+                    <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button">Full Info</button>
                     <button class="btn btn-primary">Read</button>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="bookTitle">@selectedBook.Title</h5>
-                <button @onclick="(e => ToggleModal())" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button @onclick="(e => ToggleModal())" type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -47,7 +47,9 @@
                                 }
                             </ul>
                             <div class="card-body">
-                                <p class="card-text" style="text-align: justify;">@selectedBook.Description</p>
+                                @if(selectedBook.Description != null) {
+                                    <p class="card-text" style="text-align: justify;">@selectedBook.Description</p>
+                                }
                             </div>
                         </div>
                     </div>

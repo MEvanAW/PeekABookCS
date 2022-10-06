@@ -9,33 +9,33 @@ namespace PeekABookWebApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         public BooksRepositoryService BooksRepositoryService;
-        public IEnumerable<Book> FantasyBooks { get; private set; }
-        public IEnumerable<Book> SelfHelpBooks { get; private set; }
+        public IEnumerable<Book> TechnologyBooks { get; private set; }
+        public IEnumerable<Book> BusinessBooks { get; private set; }
 
         public IndexModel(ILogger<IndexModel> logger, BooksRepositoryService booksRepositoryService)
         {
             _logger = logger;
             BooksRepositoryService = booksRepositoryService;
-            FantasyBooks = new List<Book>();
-            SelfHelpBooks = new List<Book>();
+            TechnologyBooks = new List<Book>();
+            BusinessBooks = new List<Book>();
         }
 
         public async Task OnGetAsync()
         {
-            var fantasyTask = BooksRepositoryService.GetBooksBySubject("Fantasy", 4);
-            var selfHelpTask = BooksRepositoryService.GetBooksBySubject("\"Self+Help\"", 4);
-            var tasks = new List<Task> { fantasyTask, selfHelpTask };
+            var technologyTask = BooksRepositoryService.GetBooksBySubject("Technology", 4);
+            var businessTask = BooksRepositoryService.GetBooksBySubject("Business", 4);
+            var tasks = new List<Task> { technologyTask, businessTask };
             while (tasks.Count > 0)
             {
                 Task finishedTask = await Task.WhenAny(tasks);
-                if (finishedTask == fantasyTask)
+                if (finishedTask == technologyTask)
                 {
-                    if (fantasyTask.Result != null)
-                        FantasyBooks = fantasyTask.Result;
+                    if (technologyTask.Result != null)
+                        TechnologyBooks = technologyTask.Result;
                 } else
                 {
-                    if (selfHelpTask.Result != null)
-                        SelfHelpBooks = selfHelpTask.Result;
+                    if (businessTask.Result != null)
+                        BusinessBooks = businessTask.Result;
                 }
                 tasks.Remove(finishedTask);
             }
