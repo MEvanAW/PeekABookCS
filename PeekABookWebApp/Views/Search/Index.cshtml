@@ -1,0 +1,18 @@
+﻿@using PeekABookWebApp.Models
+@{
+    ViewData["Title"] = "Search";
+}
+<h2>Search Result:</h2>
+@if(ViewData["books"] != null) {
+    @if (((List<Book>)ViewData["books"]).Count() == 0)
+    {
+        <p>Sorry, no match found.</p>
+    }
+    else {
+        <ul>
+        @foreach (Book book in (List<Book>) ViewData["books"]) {
+            <li>@book.Title</li>
+        }
+        </ul>
+    }
+}

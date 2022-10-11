@@ -13,20 +13,17 @@ namespace PeekABookWebApp.Controllers
             BooksRepositoryService = booksRepositoryService;
         }
 
-        public async Task<string> Index(string q)
+        public async Task<IActionResult> Index(string q)
         {
             if (q == null || q == "")
-                return HtmlEncoder.Default.Encode("Empty result");
+            {
+                ViewData["books"] = new List<Models.Book>();
+                return View();
+            }
             var task = BooksRepositoryService.GetBooks(q, 8);
             var books = await task;
-            if (books.Count() == 0)
-                return HtmlEncoder.Default.Encode("Empty result");
-            string returnString = "";
-            foreach (var book in books)
-            {
-                returnString += HtmlEncoder.Default.Encode($"{book.Title}; ");
-            }
-            return returnString;
+            ViewData["books"] = books;
+            return View();
         }
     }
 }
