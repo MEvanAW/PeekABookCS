@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var mvcBuilder = builder.Services.AddRazorPages();
 builder.Services.AddTransient<BooksRepositoryService>();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddControllers();
 
 if (builder.Environment.IsDevelopment())
 {
@@ -33,5 +34,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.MapBlazorHub();
+
+app.MapControllers();
 
 app.Run();
