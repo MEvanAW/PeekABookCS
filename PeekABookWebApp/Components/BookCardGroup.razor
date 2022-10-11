@@ -11,7 +11,7 @@
             <div class="card-footer">
                 <div class="btn-group float-end text-muted">
                     <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button">Full Info</button>
-                    <button class="btn btn-primary">Read</button>
+                    <a class="btn btn-primary" href="@book.PreviewLink" target="_blank" rel="noopener noreferrer" role="button">Read</a>
                 </div>
             </div>
         </div>
