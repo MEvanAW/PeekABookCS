@@ -16,5 +16,7 @@ Here are some screenshots taken from Peek a Book web version.
 ![image](https://user-images.githubusercontent.com/50491841/195244408-c288c812-0ce4-494f-be24-57ae047db49a.png)
 ### Search
 ![image](https://user-images.githubusercontent.com/50491841/195244525-02b36565-7bf9-458a-92cf-51af5a8f962d.png)
+### About Author
+![image](https://user-images.githubusercontent.com/50491841/195270319-f9e72d11-878d-490b-9c17-7781132fedee.png)
 ## Support
 If you need any help, you can contact Evan as the repository owner at m.evan.aw@gmail.com
