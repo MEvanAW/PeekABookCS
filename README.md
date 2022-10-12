@@ -7,11 +7,14 @@ Web App to search for books to read anytime and anywhere.<br/>If you want the An
 - Razor Pages
 - Blazor Components
 - Services
+- Consume Google Books API
+- JSInterop
+- Modals
 ## Screenshots
 Here are some screenshots taken from Peek a Book web version.
 ### Home
-![image](https://user-images.githubusercontent.com/50491841/195233105-15872335-b54a-4be0-acfc-59b93e37a1cc.png)
+![image](https://user-images.githubusercontent.com/50491841/195244408-c288c812-0ce4-494f-be24-57ae047db49a.png)
 ### Search
-![image](https://user-images.githubusercontent.com/50491841/195233052-e305c49c-f5a4-4d58-aef3-fdb37e569e23.png)
+![image](https://user-images.githubusercontent.com/50491841/195244525-02b36565-7bf9-458a-92cf-51af5a8f962d.png)
 ## Support
 If you need any help, you can contact Evan as the repository owner at m.evan.aw@gmail.com
