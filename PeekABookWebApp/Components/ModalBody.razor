@@ -1,0 +1,39 @@
+﻿@using PeekABookWebApp.Models
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col">
+            <img class="card-img" src="@SelectedBook.ImageLinks.Src()" />
+        </div>
+        <div class="col">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Author(s): @string.Join(", ", SelectedBook.Authors)</li>
+                    @if (SelectedBook.PageCount != null)
+                    {
+                        <li class="list-group-item">Page count: @SelectedBook.PageCount</li>
+                    }
+                    @if (SelectedBook.Categories != null)
+                    {
+                        <li class="list-group-item">Genre(s): @string.Join(", ", SelectedBook.Categories)</li>
+                    }
+                    @if (SelectedBook.AverageRating != null)
+                    {
+                        <li class="list-group-item">Average Rating: @SelectedBook.AverageRating/5</li>
+                    }
+                </ul>
+                <div class="card-body">
+                    @if (SelectedBook.Description != null)
+                    {
+                        <p class="card-text" style="text-align: justify;">@SelectedBook.Description</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Book SelectedBook { get; set; } = new Book();
+}

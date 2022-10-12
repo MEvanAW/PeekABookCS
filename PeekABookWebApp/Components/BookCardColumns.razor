@@ -3,22 +3,23 @@
 @using PeekABookWebApp.Models
 @inject IJSRuntime JS
 
-<div class="card-group" style="margin-bottom: 1.15em">
-    @foreach (var book in Books)
-    {
-        <div class="card">
-            <BookCardBody Book="@book"/>
-            <div class="card-footer">
-                <div class="btn-group float-end text-muted">
-                    <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button">Full Info</button>
-                    <a class="btn btn-primary" href="@book.PreviewLink" target="_blank" rel="noopener noreferrer" role="button">Read</a>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    @foreach(var book in Books){
+        <div class="col">
+            <div class="card">
+                <BookCardBody Book="@book" />
+                <div class="card-footer">
+                    <div class="btn-group float-end text-muted">
+                        <button @onclick="(e => SelectBook(book.Title))" class="btn btn-secondary" type="button">Full Info</button>
+                        <a class="btn btn-primary" href="@book.PreviewLink" target="_blank" rel="noopener noreferrer" role="button">Read</a>
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
 
-<div class="modal fade" id="@DescriptionModal()" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
+<div class="modal fade" id="descriptionSearchModal" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +28,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <ModalBody SelectedBook="@selectedBook"/>
+            <ModalBody SelectedBook="@selectedBook" />
         </div>
     </div>
 </div>
@@ -35,21 +36,18 @@
 @code {
     [Parameter]
     public IEnumerable<Book> Books { get; set; } = new List<Book>();
-    [Parameter]
-    public string ModalTag { get; set; } = "";
     private Book selectedBook = new Book();
     private string selectedBookTitle = "";
-    private void SelectBook(string title) {
+    private void SelectBook(string title)
+    {
         selectedBookTitle = title;
         var temp = (from book in Books where book.Title == title select book).FirstOrDefault();
         if (temp != null)
             selectedBook = temp;
         ToggleModal();
     }
-    private async void ToggleModal() {
-        await JS.InvokeVoidAsync("toggleModal", DescriptionModal());
-    }
-    private string DescriptionModal() {
-        return "description" + ModalTag + "Modal";
+    private async void ToggleModal()
+    {
+        await JS.InvokeVoidAsync("toggleModal", "descriptionSearchModal");
     }
 }

@@ -1,0 +1,16 @@
+﻿@page
+@using PeekABookWebApp.Components
+@model PeekABookWebApp.Pages.SearchModel
+@{
+    ViewData["Title"] = "Search";
+}
+<div class="text-start">
+    <h2 class="display-6">Search Result: @Model.Q</h2>
+</div>
+@if(Model.ResultBooks.Count() == 0){
+    <p>Sorry, no match on Google Books API.</p>
+}
+else {
+    @(await Html.RenderComponentAsync<BookCardColumns>(RenderMode.ServerPrerendered, new { Books = Model.ResultBooks }))
+}
+<script src="_framework/blazor.server.js"></script>
